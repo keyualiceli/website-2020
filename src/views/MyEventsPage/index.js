@@ -9,7 +9,12 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 
 import styles from "./styles.module.css";
 
-import { getJwt, getEmailFromJwt, getNameFromJwt, getRoleFromJwt } from "../../utils/Cognito/index.js";
+import {
+  getJwt,
+  getEmailFromJwt,
+  getNameFromJwt,
+  getRoleFromJwt,
+} from "../../utils/Cognito/index.js";
 import { getApplication } from "../../utils/API/index.js";
 
 const applicationDeadline = new Date(
@@ -17,7 +22,7 @@ const applicationDeadline = new Date(
 );
 const today = new Date();
 
-export default class DashboardPage extends Component {
+export default class MyEventsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,26 +47,55 @@ export default class DashboardPage extends Component {
       (data) => {
         if (today > applicationDeadline) {
           if (data.accepted) {
-            this.setState({ status: "complete", buttonStatus: "disabled", loadComplete: true, accepted: true });
-          }
-          else if (!data.accepted) {
-            this.setState({ status: "complete", buttonStatus: "disabled", loadComplete: true, accepted: false });
-          }
-          else if (!data.submitted) {
-            this.setState({ status: "incomplete", buttonStatus: "disabled", loadComplete: true });
+            this.setState({
+              status: "complete",
+              buttonStatus: "disabled",
+              loadComplete: true,
+              accepted: true,
+            });
+          } else if (!data.accepted) {
+            this.setState({
+              status: "complete",
+              buttonStatus: "disabled",
+              loadComplete: true,
+              accepted: false,
+            });
+          } else if (!data.submitted) {
+            this.setState({
+              status: "incomplete",
+              buttonStatus: "disabled",
+              loadComplete: true,
+            });
           } else {
-            this.setState({ status: "complete", buttonStatus: "disabled", loadComplete: true });
+            this.setState({
+              status: "complete",
+              buttonStatus: "disabled",
+              loadComplete: true,
+            });
           }
         } else {
           if (!data || !data.submitted) {
-            this.setState({ status: "incomplete", buttonStatus: "enabled", loadComplete: true });
+            this.setState({
+              status: "incomplete",
+              buttonStatus: "enabled",
+              loadComplete: true,
+            });
           } else {
-            this.setState({ status: "complete", buttonStatus: "disabled", loadComplete: true });
+            this.setState({
+              status: "complete",
+              buttonStatus: "disabled",
+              loadComplete: true,
+            });
           }
         }
       },
       // If there is an error then there is no application for the user
-      () => this.setState({ status: "incomplete", buttonStatus: "enabled", loadComplete: true })
+      () =>
+        this.setState({
+          status: "incomplete",
+          buttonStatus: "enabled",
+          loadComplete: true,
+        })
     );
   }
 
@@ -85,7 +119,7 @@ export default class DashboardPage extends Component {
                 </Col>
                 {this.state.status && (
                   <Col className={styles.centerContent}>
-                    <div style={{color: "white"}}>
+                    <div style={{ color: "white" }}>
                       Hello World, welcome to the Executive Dashboard!
                     </div>
                   </Col>
@@ -95,9 +129,8 @@ export default class DashboardPage extends Component {
           )}
         </GradientBackground>
       );
-    }
-    else {
-      return(
+    } else {
+      return (
         // hacker dashboard
         <GradientBackground className={styles.gradientBackground}>
           {!this.state.loadComplete && (
@@ -114,7 +147,7 @@ export default class DashboardPage extends Component {
                 {this.state.status && (
                   <Col className={styles.centerContent}>
                     <DashboardCard
-                      title={"Welcome, " + getNameFromJwt() + "!"}
+                      title={"My Events"}
                       key={this.state.status}
                       status={this.state.status}
                       buttonStatus={this.state.buttonStatus}

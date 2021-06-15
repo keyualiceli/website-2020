@@ -17,6 +17,7 @@ import ForgotPasswordPageChange from "./views/ForgotPasswordPageChange";
 import WebsitePage from "./views/WebsitePage";
 import DashboardPage from "./views/DashboardPage";
 import ConfirmAccountPage from "./views/ConfirmAccountPage";
+import MyEventsPage from "./views/MyEventsPage";
 import ExecPage from "./views/ExecPage";
 
 import "./index.css";
@@ -39,6 +40,7 @@ const routing = (
       />
       <Route path="/dashboard" component={DashboardPage} />
       <Route path="/application" component={ApplicationPage} />
+      <Route path="/myevents" component={MyEventsPage} />
       <Route component={NotFound} />
     </Switch>
   </Router>
