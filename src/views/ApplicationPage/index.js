@@ -57,6 +57,8 @@ export default class Application extends Component {
     };
 
     const currentDate = new Date();
+    var jwt = getJwt();
+    //const currentDate = new Date();
 
     var jwt = getJwt();
     //const currentDate = new Date();
